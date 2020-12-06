@@ -20,15 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06615ae2-b40c-4849-84e2-79fc47db4ee1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data_handle.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data_preprocess.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/kor2eng.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/model/attention.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/model/lstm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/model/seq2seq.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/util.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Kor2EngTranslation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Kor2EngTranslation.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/kor2eng.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/kor2eng.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,8 +52,91 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="data_handle" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kor2EngTranslation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lib" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lib/data_handle.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="kor2eng" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kor2EngTranslation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lib" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lib/kor2eng.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kor2EngTranslation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.kor2eng" />
+        <item itemvalue="Python.data_handle" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -82,5 +160,56 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="582" y="233" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607182500518">
+      <screen x="43" y="23" width="1749" height="1097" />
+    </state>
+    <state x="582" y="233" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/43.23.1749.1097@43.23.1749.1097" timestamp="1607182500518" />
+    <state x="868" y="326" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607188853577">
+      <screen x="43" y="23" width="1749" height="1097" />
+    </state>
+    <state x="868" y="326" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/43.23.1749.1097@43.23.1749.1097" timestamp="1607188853577" />
+    <state width="1143" height="271" key="GridCell.Tab.0.bottom" timestamp="1607260534305">
+      <screen x="43" y="23" width="1749" height="1097" />
+    </state>
+    <state width="1143" height="271" key="GridCell.Tab.0.bottom/43.23.1749.1097@43.23.1749.1097" timestamp="1607260534305" />
+    <state width="1143" height="271" key="GridCell.Tab.0.center" timestamp="1607260534305">
+      <screen x="43" y="23" width="1749" height="1097" />
+    </state>
+    <state width="1143" height="271" key="GridCell.Tab.0.center/43.23.1749.1097@43.23.1749.1097" timestamp="1607260534305" />
+    <state width="1143" height="271" key="GridCell.Tab.0.left" timestamp="1607260534305">
+      <screen x="43" y="23" width="1749" height="1097" />
+    </state>
+    <state width="1143" height="271" key="GridCell.Tab.0.left/43.23.1749.1097@43.23.1749.1097" timestamp="1607260534305" />
+    <state width="1143" height="271" key="GridCell.Tab.0.right" timestamp="1607260534305">
+      <screen x="43" y="23" width="1749" height="1097" />
+    </state>
+    <state width="1143" height="271" key="GridCell.Tab.0.right/43.23.1749.1097@43.23.1749.1097" timestamp="1607260534305" />
+    <state width="1143" height="271" key="GridCell.Tab.1.bottom" timestamp="1607260534306">
+      <screen x="43" y="23" width="1749" height="1097" />
+    </state>
+    <state width="1143" height="271" key="GridCell.Tab.1.bottom/43.23.1749.1097@43.23.1749.1097" timestamp="1607260534306" />
+    <state width="1143" height="271" key="GridCell.Tab.1.center" timestamp="1607260534305">
+      <screen x="43" y="23" width="1749" height="1097" />
+    </state>
+    <state width="1143" height="271" key="GridCell.Tab.1.center/43.23.1749.1097@43.23.1749.1097" timestamp="1607260534305" />
+    <state width="1143" height="271" key="GridCell.Tab.1.left" timestamp="1607260534305">
+      <screen x="43" y="23" width="1749" height="1097" />
+    </state>
+    <state width="1143" height="271" key="GridCell.Tab.1.left/43.23.1749.1097@43.23.1749.1097" timestamp="1607260534305" />
+    <state width="1143" height="271" key="GridCell.Tab.1.right" timestamp="1607260534305">
+      <screen x="43" y="23" width="1749" height="1097" />
+    </state>
+    <state width="1143" height="271" key="GridCell.Tab.1.right/43.23.1749.1097@43.23.1749.1097" timestamp="1607260534305" />
+    <state x="619" y="210" key="SettingsEditor" timestamp="1607182792022">
+      <screen x="43" y="23" width="1749" height="1097" />
+    </state>
+    <state x="619" y="210" key="SettingsEditor/43.23.1749.1097@43.23.1749.1097" timestamp="1607182792022" />
+    <state width="736" height="548" key="XDebugger.FullValuePopup" timestamp="1607247418296">
+      <screen x="43" y="23" width="1749" height="1097" />
+    </state>
+    <state width="736" height="548" key="XDebugger.FullValuePopup/43.23.1749.1097@43.23.1749.1097" timestamp="1607247418296" />
   </component>
 </project>

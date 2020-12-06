@@ -51,6 +51,11 @@ def accuracy(pred, target):
     acc = 0
     return acc
 
+@torch.no_grad()
+def perplexcity(pred, target):
+    acc = 0
+    return acc
+
 
 class Seq2SeqModel(Translator):
 
@@ -85,7 +90,7 @@ class Seq2SeqModel(Translator):
                 total_acc += accuracy(pred, end)
                 total_loss -= b_loss.item()
 
-            # if epoch % 1000 == 0:
+            if epoch % 10 == 0:
                 print()
                 print(total_loss)
 
