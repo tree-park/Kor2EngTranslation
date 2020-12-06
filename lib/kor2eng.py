@@ -58,19 +58,14 @@ class Seq2SeqModel(Translator):
         self.dataset = TrainSet(self.dconf.train_ko_path, self.dconf.train_en_path, self.ko_vocab,
                                 self.en_vocab)
 
-        # 2. dataload 정의
         self._dataload = DataLoader(self.dataset,
                                     batch_size=self.mconf.batch_size,
                                     num_workers=0, collate_fn=collate_fn)
         print(len(self.ko_vocab), len(self.en_vocab))
-        # 모델 정의 with config
-        self.lm = Seq2Seq(len(self.ko_vocab)+1, len(self.en_vocab)+1,
+        self.lm = Seq2Seq(len(self.ko_vocab) + 1, len(self.en_vocab) + 1,
                           self.mconf.emb_dim, self.mconf.hid_dim)
-        # loss
         self.loss = nn.NLLLoss()
-        # optimizer
         self.optim = optim.Adam(params=self.lm.parameters(), lr=self.mconf.lr)
-        # lr scheduler
         self.lrscheder = optim.lr_scheduler.ReduceLROnPlateau(self.optim, patience=5)
 
         for epoch in tqdm(range(self.mconf.epoch), desc='epoch'):
@@ -80,9 +75,9 @@ class Seq2SeqModel(Translator):
             self.lm.train()
             for i, batch in tqdm(enumerate(self._dataload), desc="step", total=len(self._dataload)):
                 kor, end = batch
-                self.optim.zero_grad()  # 기울기 초기화
+                self.optim.zero_grad()
                 pred = self.lm(kor, end)
-                pred, end = pred.view(-1, len(self.en_vocab)+1), end.view(1, -1).squeeze(0)
+                pred, end = pred.view(-1, len(self.en_vocab) + 1), end.view(1, -1).squeeze(0)
                 b_loss = self.loss(pred, end)
                 b_loss.backward()
                 self.optim.step()
@@ -90,15 +85,9 @@ class Seq2SeqModel(Translator):
                 total_acc += accuracy(pred, end)
                 total_loss -= b_loss.item()
 
-            if epoch % 1000 == 0:
+            # if epoch % 1000 == 0:
                 print()
-                print(total_loss, total_acc / self.mconf.epoch)
-
-
-class LSTMModel(Translator):
-
-    def train(self):
-        pass
+                print(total_loss)
 
 
 class LSTMAttention(Translator):

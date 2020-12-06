@@ -5,7 +5,7 @@ https://github.com/j-min/korean-parallel-corpora/tree/master/korean-english-v1
 """
 
 from lib.util import Config
-from lib.kor2eng import Translator, Seq2SeqModel
+from lib.kor2eng import Seq2SeqModel
 
 
 # load configs

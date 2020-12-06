@@ -89,10 +89,6 @@ class Vocab:
 
 
 def _preprocessor(corpus: list):
-    # 데이터 토크나이저 with options(최대 빈도 단어.. 등)
-    #   데이터 문장 단위 분리
-    #   데이터 단어 분리
-    #   return 문장:[단어1, 단어2 ...]
     result = []
     for line in corpus:
         sents = line.strip()
