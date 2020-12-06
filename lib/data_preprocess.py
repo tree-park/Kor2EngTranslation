@@ -19,8 +19,8 @@ class TrainSet(Dataset):
     def dataset_form(self):
         rst = []
         for ko, en in zip(self._ko_corpus, self._en_corpus):
-            ko = [self.ko_w2idx[x] for x in ko]
-            en = [self.en_w2idx[x] for x in en]
+            ko = [self._ko_vocab[x] for x in ko]
+            en = [self._en_vocab[x] for x in en]
             # padding
             rst.append([ko, en])
         return rst
@@ -36,28 +36,33 @@ class TrainSet(Dataset):
 
 UNKNOWN = '[UKN]'
 CLOSE = '[CLS]'
+PAD = '[PAD]'
+START = '[SRT]'
 
 
 class Vocab:
     # 0 for padding
-    WORD2IDX = {UNKNOWN: 1, CLOSE: 2}
+    WORD2IDX = {PAD: 0, UNKNOWN: 1, CLOSE: 2, START: 3}
 
     def __init__(self, min_cnt):
         self.min_cnt = min_cnt
-        self.excepts = '?!.#$%^&*'
-        self.word2idx = self.WORD2IDX
+        self.excepts = '.#$%^&*'
+        self.word2idx = {k: v for k, v in self.WORD2IDX.items()}
         self.idx2word = {}
 
     def load(self, corpus: list):
         vocabs = {}
         for sent in corpus:
-            for word in sent:
+            for word in sent[1: -1]:
                 if word not in vocabs.keys():
                     vocabs[word] = 0
                 vocabs[word] += 1
-
-        vocabs = vocabs.keys()
-        self.word2idx = {w: idx for idx, w in enumerate(vocabs)}
+        idx = len(self.WORD2IDX)
+        for w in vocabs.keys():
+            if self._vocabs_filter(w, vocabs[w]):
+                self.word2idx[w] = idx
+                idx += 1
+        print(idx, len(self.word2idx))
         return self.word2idx
 
     def _vocabs_filter(self, v, cnt):
@@ -91,17 +96,27 @@ def _preprocessor(corpus: list):
     result = []
     for line in corpus:
         sents = line.strip()
-        for s in sents:
-            words = _to_word(s) + [CLOSE]
-            result.append(words)
+        words = _to_word(sents)
+        if len(words) < 5:
+            continue
+        words = [START] + words + [CLOSE]
+        result.append(words)
     return result
 
 
 def _to_word(a_sent: str) -> list:
+    """ Filter word as stop words """
     rst = []
-    for word in a_sent.split(' '):
-        if word.strip() in ',./?!':
+    for word in re.split(r'(\s|\.|\,|\?|\!|\"|\')+', a_sent):
+        word = word.strip()
+        if not word or word in ',."\'':
             continue
-        rst.append(word.lower())
-        # 불용어 처리 등등...
+        rst.append(word)
     return rst
+
+
+def collate_fn(batch):
+    ko, en = zip(*batch)
+    pad_ko = torch.nn.utils.rnn.pad_sequence(ko,batch_first=True)
+    pad_en = torch.nn.utils.rnn.pad_sequence(en,batch_first=True)
+    return pad_ko, pad_en
