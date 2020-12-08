@@ -3,10 +3,10 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+import math
 
 from lib.data_preprocess import Vocab, TrainSet, collate_fn
 from lib.model.seq2seq import LSTMSeq2Seq, LSTMSeq2Seq2
-from lib.model.util import Perplexity
 
 
 class Translator:
@@ -72,14 +72,13 @@ class Seq2SeqModel(Translator):
         self.lm = LSTMSeq2Seq(len(self.ko_vocab) + 1, len(self.en_vocab) + 1,
                               self.mconf.emb_dim, self.mconf.hid_dim)
         self.loss = nn.CrossEntropyLoss()
-        self.perpelexity = Perplexity()
         self.optim = optim.Adam(params=self.lm.parameters(), lr=self.mconf.lr)
         self.lrscheder = optim.lr_scheduler.ReduceLROnPlateau(self.optim, patience=5)
 
+        total_loss = 0
+        total_acc = 0
+        self.lm.train()
         for epoch in tqdm(range(self.mconf.epoch), desc='epoch'):
-            total_loss = 0
-            total_acc = 0
-            self.lm.train()
             for i, batch in tqdm(enumerate(self._dataload), desc="step", total=len(self._dataload)):
                 ko, en = batch
                 self.optim.zero_grad()
@@ -92,13 +91,17 @@ class Seq2SeqModel(Translator):
                 self.optim.step()
 
                 total_acc += accuracy(pred, en_ts)
-                total_loss -= b_loss.item()
-                ppl = self.perpelexity(pred, en_ts)
-                print(self.perpelexity.get_loss())
+                total_loss += b_loss.item()
+
             # if epoch % 10 == 0:
-            print()
-            print(epoch, total_loss, total_acc)
+            #     ppl = math.exp(total_loss/10)
+            #     total_acc = 0
+
+            print(len(self.dataset), self.mconf.batch_size, math.ceil(len(self.dataset)/self.mconf.batch_size))
+            ppl = math.exp(total_loss / math.ceil(len(self.dataset)/self.mconf.batch_size))
+            print(epoch, total_loss, total_acc, ppl)
             self.lrscheder.step(total_loss)
+            total_loss = 0
 
 
 class LSTMAttention(Translator):
