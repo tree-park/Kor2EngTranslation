@@ -16,4 +16,5 @@ mconf = Config(mconf_path)
 
 # load w2v model and train
 lm = Seq2SeqModel(dconf, mconf)
+# lm = LSTMSeq2Seq()
 lm.train()

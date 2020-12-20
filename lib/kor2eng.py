@@ -96,10 +96,9 @@ class Seq2SeqModel(Translator):
             # if epoch % 10 == 0:
             #     ppl = math.exp(total_loss/10)
             #     total_acc = 0
-
-            print(len(self.dataset), self.mconf.batch_size, math.ceil(len(self.dataset)/self.mconf.batch_size))
-            ppl = math.exp(total_loss / math.ceil(len(self.dataset)/self.mconf.batch_size))
-            print(epoch, total_loss, total_acc, ppl)
+            itersize = math.ceil(len(self.dataset)/self.mconf.batch_size)
+            ppl = math.exp(total_loss / itersize)
+            print(epoch, total_loss, total_acc/itersize, ppl)
             self.lrscheder.step(total_loss)
             total_loss = 0
 
