@@ -2,6 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from lib.model.lstm import BiLSTM, LSTM
+from lib.model.attention import Attention
+
 
 class LSTMSeq2Seq(nn.Module):
 
@@ -63,59 +66,50 @@ class BiLSTMSeq2Seq(nn.Module):
         self.hid_size = hid_size
         self.enc_emb = nn.Embedding(ko_vocab_size, emb_size)
         self.dec_emb = nn.Embedding(en_vocab_size, emb_size)
-        self.enc_lstm_fw = nn.LSTMCell(emb_size, hid_size)
-        self.enc_lstm_bw = nn.LSTMCell(hid_size, hid_size)
-        self.dec_lstm_1 = nn.LSTMCell(emb_size, hid_size)
-        self.dec_lstm_2 = nn.LSTMCell(hid_size, hid_size)
+        self.bi_lstm = BiLSTM(emb_size, hid_size)
+        self.lstm = LSTM(emb_size, hid_size)
+        self.attn = Attention(hid_size)
+        self.dec_lstm = nn.LSTMCell(emb_size+ hid_size*2, hid_size)
         self.out_layer = nn.Linear(hid_size, en_vocab_size)
 
     def encoder(self, inp):
-        # inp [batchsize, maxlen]
+        """
+
+        Args:
+            inp ([bsize, maxlen]):
+
+        Returns:
+            output ([bsize, maxlen+1, hid_size*2])
+            hid ([bsize, hsize*2])
+
+        """
         # emb [batchsize, maxlen, emb_size] => [maxlen, batchsize, emb_size]
-        # emb = self.enc_emb(inp).view(inp.size(1), inp.size(0), -1)
         emb = torch.transpose(self.enc_emb(inp), 0, 1)
-        # hid_state [batch_size, hid_size]
-        init_hidd = torch.empty(inp.size(0), self.hid_size)
-        init_cell = torch.empty(inp.size(0), self.hid_size)
-        init_hidd = nn.init.xavier_normal_(init_hidd)
-        init_cell = nn.init.xavier_normal_(init_cell)
+        output, hid = self.bi_lstm(emb)
+        return output, hid
 
-        hid_state = init_hidd
-        cell_state = init_cell
-        fw_hid_states = []
-        for i in range(inp.size(1)):  # maxlen
-            # emb[i] [batchsize, emb_size] [emb_size, hid_size]
-            hid_state, cell_state = self.enc_lstm_fw(emb[i], (hid_state, cell_state))
-            fw_hid_states.append(hid_state)
-        fw_hid_states.append(init_hidd)
-        fw_hid_states = torch.stack(fw_hid_states)
+    def decoder(self, inp, enc_output, enc_last_hid):
+        """
 
-        # fw_out = torch.transpose(torch.stack(fw_hid_states), 0, 1)
-        bw_hid_states = []
-        hid_state = init_hidd
-        cell_state = init_cell
-        for i in range(inp.size(1), -1, -1):  # maxlen
-            # emb[i] [batchsize, emb_size] [emb_size, hid_size]
-            hid_state, cell_state = self.enc_lstm_bw(hid_state, (hid_state, cell_state))
-            bw_hid_states.append(hid_state)
-        bw_hid_states.append(init_hidd)
-        bw_hid_states = list(reversed(bw_hid_states))
-        bw_hid_states = torch.stack(bw_hid_states)
+        Args:
+            enc_output ([bsize, maxlen, hid_size*2]):
+            enc_last_hid ([batch_size, hid_size*2]):
+            inp ([bsize, maxlen]):
 
-        hid_out = torch.cat((fw_hid_states, bw_hid_states), dim=2)
-        hid_out = torch.transpose(hid_out, 0, 1)
-        return hid_out, cell_state
+        Returns:
 
-    def decoder(self, enc_hid, enc_cel, inp):
-        hid_state = enc_hid
-        cell_state = enc_cel
-        # emb [batchsize, maxlen, emb_size] => [maxlen, batchsize, emb_size]
-        # dec_emb = self.dec_emb(inp).view(inp.size(1), inp.size(0), -1)
+        """
+        hid_state = enc_last_hid[0]
+        cell_state = enc_last_hid[1]
+        # dec_emb [batchsize, maxlen, emb_size] => [maxlen, batchsize, emb_size]
         dec_emb = torch.transpose(self.dec_emb(inp), 0, 1)
         out = []
         for i in range(0, inp.size(1)):
-            hid_state, cell_state = self.dec_lstm_1(dec_emb[i], (hid_state, cell_state))
-            hid_state, cell_state = self.dec_lstm_2(hid_state, (hid_state, cell_state))
+            # Cal attention
+            cvec = self.attn(hid_state, enc_output)  # [bsize, hid_size*2]
+            # emb : [batchsize, emb_size + hid_size*2]
+            emb = torch.cat((dec_emb[i], cvec), dim=1)
+            hid_state, cell_state = self.dec_lstm(emb, (hid_state, cell_state))
             out.append(hid_state)
         out = torch.transpose(torch.stack(out), 0, 1)
         out = F.relu(self.out_layer(out))
@@ -123,9 +117,9 @@ class BiLSTMSeq2Seq(nn.Module):
         return out
 
     def forward(self, inp, tar):
-        enc_hid, enc_cell = self.encoder(inp)
-        dec = self.decoder(enc_hid, enc_cell, tar)
-        return F.log_softmax(dec)
+        output, hid = self.encoder(inp)
+        dec = self.decoder(tar, output, hid)
+        return dec
 
 
 class LSTMSeq2Seq2(nn.Module):
