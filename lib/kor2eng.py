@@ -5,7 +5,8 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 import math
 
-from lib.data_preprocess import Vocab, TrainSet, collate_fn
+from lib.data_handle import load_data
+from lib.data_preprocess import Vocab, Corpus, collate_fn, preprocessor
 from lib.model.seq2seq import LSTMSeq2Seq, LSTMSeq2Seq2, BiLSTMSeq2Seq
 
 
@@ -31,7 +32,7 @@ class Translator:
     def train(self):
         raise
 
-    def predict(self):
+    def predict(self, corpus):
         raise
 
     def save(self, fname: str):
@@ -48,10 +49,13 @@ class Translator:
         # kor to word idx
 
         # predict with ko wid
-        pred = self.predict()
+        pred = self.predict(kor)
         # convert predict to en wid
-
-        return eng
+        rst = []
+        for sent_idx in pred:
+            sent = [self.en_vocab.get_word(idx) for idx in sent_idx if not 0]
+            rst.append(sent)
+        return rst
 
     def eng_to_kor(self, eng: str):
         kor = ''
@@ -72,9 +76,11 @@ def accuracy(pred, target):
 class Seq2SeqModel(Translator):
 
     def train(self):
-        # TODO data load랑 TrainSet랑 분리하기.. predict에도 사용할 수 있도록
-        self.dataset = TrainSet(self.dconf.train_ko_path, self.dconf.train_en_path, self.ko_vocab,
-                                self.en_vocab)
+
+        ko_corpus = preprocessor(load_data(self.dconf.train_ko_path))
+        en_corpus = preprocessor(load_data(self.dconf.train_en_path))
+        train_set = self.trainset_form(ko_corpus, en_corpus, self.ko_vocab, self.en_vocab)
+        self.dataset = Corpus(train_set)
 
         self._dataload = DataLoader(self.dataset,
                                     batch_size=self.mconf.batch_size,
@@ -83,7 +89,7 @@ class Seq2SeqModel(Translator):
         # self.lm = LSTMSeq2Seq(len(self.ko_vocab) + 1, len(self.en_vocab) + 1,
         #                       self.mconf.emb_dim, self.mconf.hid_dim)
         self.lm = BiLSTMSeq2Seq(len(self.ko_vocab) + 1, len(self.en_vocab) + 1,
-                              self.mconf.emb_dim, self.mconf.hid_dim)
+                                self.mconf.emb_dim, self.mconf.hid_dim)
         self.loss = nn.CrossEntropyLoss()
         self.optim = optim.Adam(params=self.lm.parameters(), lr=self.mconf.lr)
         self.lrscheder = optim.lr_scheduler.ReduceLROnPlateau(self.optim, patience=5)
@@ -109,11 +115,40 @@ class Seq2SeqModel(Translator):
             # if epoch % 10 == 0:
             #     ppl = math.exp(total_loss/10)
             #     total_acc = 0
-            itersize = math.ceil(len(self.dataset)/self.mconf.batch_size)
+            itersize = math.ceil(len(self.dataset) / self.mconf.batch_size)
             ppl = math.exp(total_loss / itersize)
-            print(epoch, total_loss, total_acc/itersize, ppl)
+            print(epoch, total_loss, total_acc / itersize, ppl)
             self.lrscheder.step(total_loss)
             total_loss = 0
 
-    def predict(self):
+    def predict(self, corpus):
+        ko_corpus = preprocessor(load_data(self.dconf.train_en_path))
+        pred_set = self.predset_form(ko_corpus, self.ko_vocab)
+        self.dataset = Corpus(pred_set)
+        self._dataload = DataLoader(self.dataset,
+                                    batch_size=self.mconf.batch_size,
+                                    num_workers=0, collate_fn=collate_fn)
+        print(len(self.ko_vocab), len(self.en_vocab))
+        result = []
+        for i, batch in tqdm(enumerate(self._dataload), desc="step", total=len(self._dataload)):
+            pred = self.lm.predict(batch, maxlen=50)
+            result.extend(pred)
+            print(pred)
+        return result
 
+    def trainset_form(self, ko_corpus, en_corpus, ko_vocab, en_vocab):
+        rst = []
+        for ko, en in zip(ko_corpus, en_corpus):
+            ko = [ko_vocab[x] for x in ko]
+            en = [en_vocab[x] for x in en]
+            # padding
+            rst.append([ko, en])
+        return rst
+
+    def predset_form(self, corpus, vocab):
+        rst = []
+        for ko in corpus:
+            ko = [vocab[x] for x in ko]
+            # padding
+            rst.append(ko)
+        return rst

@@ -68,8 +68,8 @@ class BiLSTMSeq2Seq(nn.Module):
         self.dec_emb = nn.Embedding(en_vocab_size, emb_size)
         self.bi_lstm = BiLSTM(emb_size, hid_size)
         self.attn = ConcatAttention(hid_size)
-        self.dec_lstm = nn.LSTMCell(emb_size + hid_size*2, hid_size*2)
-        self.out_layer = nn.Linear(hid_size*2, en_vocab_size)
+        self.dec_lstm = nn.LSTMCell(emb_size + hid_size * 2, hid_size * 2)
+        self.out_layer = nn.Linear(hid_size * 2, en_vocab_size)
 
     def encoder(self, inp):
         """
@@ -89,7 +89,7 @@ class BiLSTMSeq2Seq(nn.Module):
 
     def decoder(self, inp, enc_output, enc_last_hid):
         """
-
+        Teacher forcing Decoder
         Args:
             enc_output ([bsize, maxlen, hid_size*2]):
             enc_last_hid ([batch_size, hid_size*2]):
@@ -98,8 +98,8 @@ class BiLSTMSeq2Seq(nn.Module):
         Returns:
 
         """
-        hid_state = enc_last_hid[0]
-        cell_state = enc_last_hid[1]
+        hid_state, cell_state = enc_last_hid
+
         # dec_emb [batchsize, maxlen, emb_size] => [maxlen, batchsize, emb_size]
         dec_emb = torch.transpose(self.dec_emb(inp), 0, 1)
         out = []
@@ -116,9 +116,44 @@ class BiLSTMSeq2Seq(nn.Module):
         return out
 
     def forward(self, inp, tar):
+        """
+
+        Args:
+            inp ():
+            tar ():
+
+        Returns:
+
+        """
         output, hid = self.encoder(inp)
         dec = self.decoder(tar, output, hid)
         return dec
+
+    def predict(self, inp, maxlen):
+        """
+
+        Args:
+            inp ():
+            maxlen ():
+
+        Returns:
+
+        """
+        enc_output, (hid_state, cell_state) = self.encoder(inp)
+        out = []
+        dec_inp = inp  # [batch]
+        for i in range(0, maxlen):
+            # Cal attention
+            cvec = self.attn(hid_state, enc_output)  # [bsize, hid_size*2]
+            # emb : [batchsize, emb_size + hid_size*2]
+            dec_emb = self.dec_emb(dec_inp)  # [bsize, emb]
+            emb = torch.cat((dec_emb, cvec), dim=1)
+            hid_state, cell_state = self.dec_lstm(emb, (hid_state, cell_state))
+
+            dec_inp = torch.argmax(F.log_softmax(F.relu(self.out_layer(emb)), dim=1))  # [batch]
+            out.append(dec_inp)
+        out = torch.transpose(torch.stack(out), 0, 1)
+        return out
 
 
 class LSTMSeq2Seq2(nn.Module):

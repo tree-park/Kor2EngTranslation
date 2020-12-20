@@ -4,26 +4,10 @@ from torch.utils.data import Dataset
 from .data_handle import load_data
 
 
-class TrainSet(Dataset):
+class Corpus(Dataset):
 
-    def __init__(self, ko_path: str, en_path: str, ko_vocab, en_vocab):
-        self._ko_vocab = ko_vocab
-        self._en_vocab = en_vocab
-
-        self._ko_corpus = _preprocessor(load_data(ko_path))
-        self._en_corpus = _preprocessor(load_data(en_path))
-        self.ko_w2idx = self._ko_vocab.load(self._ko_corpus)
-        self.en_w2idx = self._en_vocab.load(self._en_corpus)
-        self._data = self.dataset_form()
-
-    def dataset_form(self):
-        rst = []
-        for ko, en in zip(self._ko_corpus, self._en_corpus):
-            ko = [self._ko_vocab[x] for x in ko]
-            en = [self._en_vocab[x] for x in en]
-            # padding
-            rst.append([ko, en])
-        return rst
+    def __init__(self, data_set):
+        self._data = data_set
 
     def __len__(self):
         return len(self._data)
@@ -88,7 +72,7 @@ class Vocab:
             return self.word2idx[UNKNOWN]
 
 
-def _preprocessor(corpus: list):
+def preprocessor(corpus: list):
     result = []
     for line in corpus:
         sents = line.strip()
