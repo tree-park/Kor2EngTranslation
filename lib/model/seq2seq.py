@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from lib.model.lstm import BiLSTM, LSTM
-from lib.model.attention import Attention
+from lib.model.lstm import BiLSTM
+from lib.model.attention import ConcatAttention
 
 
 class LSTMSeq2Seq(nn.Module):
@@ -67,9 +67,8 @@ class BiLSTMSeq2Seq(nn.Module):
         self.enc_emb = nn.Embedding(ko_vocab_size, emb_size)
         self.dec_emb = nn.Embedding(en_vocab_size, emb_size)
         self.bi_lstm = BiLSTM(emb_size, hid_size)
-        self.lstm = LSTM(emb_size, hid_size)
-        self.attn = Attention(hid_size)
-        self.dec_lstm = nn.LSTMCell(emb_size+ hid_size*2, hid_size)
+        self.attn = ConcatAttention(hid_size)
+        self.dec_lstm = nn.LSTMCell(emb_size + hid_size*2, hid_size)
         self.out_layer = nn.Linear(hid_size, en_vocab_size)
 
     def encoder(self, inp):

@@ -6,7 +6,7 @@ from tqdm import tqdm
 import math
 
 from lib.data_preprocess import Vocab, TrainSet, collate_fn
-from lib.model.seq2seq import LSTMSeq2Seq, LSTMSeq2Seq2
+from lib.model.seq2seq import LSTMSeq2Seq, LSTMSeq2Seq2, BiLSTMSeq2Seq
 
 
 class Translator:
@@ -69,7 +69,9 @@ class Seq2SeqModel(Translator):
                                     batch_size=self.mconf.batch_size,
                                     num_workers=0, collate_fn=collate_fn)
         print(len(self.ko_vocab), len(self.en_vocab))
-        self.lm = LSTMSeq2Seq(len(self.ko_vocab) + 1, len(self.en_vocab) + 1,
+        # self.lm = LSTMSeq2Seq(len(self.ko_vocab) + 1, len(self.en_vocab) + 1,
+        #                       self.mconf.emb_dim, self.mconf.hid_dim)
+        self.lm = BiLSTMSeq2Seq(len(self.ko_vocab) + 1, len(self.en_vocab) + 1,
                               self.mconf.emb_dim, self.mconf.hid_dim)
         self.loss = nn.CrossEntropyLoss()
         self.optim = optim.Adam(params=self.lm.parameters(), lr=self.mconf.lr)
@@ -101,9 +103,3 @@ class Seq2SeqModel(Translator):
             print(epoch, total_loss, total_acc/itersize, ppl)
             self.lrscheder.step(total_loss)
             total_loss = 0
-
-
-class LSTMAttention(Translator):
-
-    def train(self):
-        pass
