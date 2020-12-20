@@ -1,6 +1,6 @@
 {
     "emb_dim": 128,
-    "hid_dim": 256,
+    "hid_dim": 64,
     "epoch": 10000,
     "batch_size": 500,
     "lr": 0.0001

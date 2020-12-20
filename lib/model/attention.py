@@ -7,7 +7,7 @@ class ConcatAttention(nn.Module):
     """ Concat Attention """
     def __init__(self, hid_size):
         super(ConcatAttention, self).__init__()
-        self.align = nn.Linear(hid_size * 2, hid_size)
+        self.align = nn.Linear(hid_size * 4, hid_size)
         self.v = nn.Linear(hid_size, 1)
 
     def forward(self, dec_hid, enc_hids):
@@ -26,7 +26,7 @@ class ConcatAttention(nn.Module):
         energy = self.v(energy).squeeze()  # [bsize, maxlen]
         attn = F.softmax(energy).unsqueeze(1)  # [bsize, 1, maxlen]
         context_vec = torch.bmm(attn, enc_hids).squeeze()  # [bsize, 1, maxlen] * [bsize, maxlen, hid_size*2]
-        return context_vec
+        return context_vec  # [bsize, hid_size*2]
 
 
 class DotAttention(nn.Module):
