@@ -31,16 +31,26 @@ class Translator:
     def train(self):
         raise
 
-    def save(self, fname):
+    def predict(self):
+        raise
+
+    def save(self, fname: str):
         """ save model """
         torch.save(self.lm.state_dict(), '../results/model/' + fname)
 
-    def load(self, path: str):
+    def load(self, fname: str):
         """ load pytorch model """
-        self.lm.load_state_dict(torch.load(path))
+        self.lm.load_state_dict(torch.load('../results/model/' + fname))
 
     def kor_to_eng(self, kor: str):
+        """ Translate Korean to English """
         eng = ''
+        # kor to word idx
+
+        # predict with ko wid
+        pred = self.predict()
+        # convert predict to en wid
+
         return eng
 
     def eng_to_kor(self, eng: str):
@@ -62,6 +72,7 @@ def accuracy(pred, target):
 class Seq2SeqModel(Translator):
 
     def train(self):
+        # TODO data load랑 TrainSet랑 분리하기.. predict에도 사용할 수 있도록
         self.dataset = TrainSet(self.dconf.train_ko_path, self.dconf.train_en_path, self.ko_vocab,
                                 self.en_vocab)
 
@@ -103,3 +114,6 @@ class Seq2SeqModel(Translator):
             print(epoch, total_loss, total_acc/itersize, ppl)
             self.lrscheder.step(total_loss)
             total_loss = 0
+
+    def predict(self):
+

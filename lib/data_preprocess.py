@@ -62,7 +62,7 @@ class Vocab:
             if self._vocabs_filter(w, vocabs[w]):
                 self.word2idx[w] = idx
                 idx += 1
-        print(idx, len(self.word2idx))
+        # print(idx, len(self.word2idx))
         return self.word2idx
 
     def _vocabs_filter(self, v, cnt):
