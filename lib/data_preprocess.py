@@ -1,21 +1,8 @@
 import re
 import torch
-from torch.utils.data import Dataset
-
-
-class Corpus(Dataset):
-
-    def __init__(self, data_set):
-        self._data = data_set
-
-    def __len__(self):
-        return len(self._data)
-
-    def __getitem__(self, idx: int):
-        """ return input word and target word """
-        ko, en = self._data[idx]
-        return torch.tensor(ko), torch.tensor(en)
-
+from konlpy.tag import Kkma
+from nltk.tokenize import sent_tokenize, MWETokenizer
+from nltk.stem import PorterStemmer
 
 UNKNOWN = '[UKN]'
 CLOSE = '[CLS]'
@@ -71,31 +58,45 @@ class Vocab:
             return self.word2idx[UNKNOWN]
 
 
-def preprocessor(corpus: list):
+def preprocessor(corpus: list, lang='ko'):
     result = []
+    tkner = Tokenizer(lang)
     for line in corpus:
-        sents = line.strip()
-        words = _to_word(sents)
-        if len(words) < 5:
-            continue
-        words = [START] + words + [CLOSE]
-        result.append(words)
+        line = line.strip()
+        sents = tkner.sent_seperator(line)
+        sents = [tkner.tokenizer(sent) for sent in sents]  # by words
+        # words = _to_word(sents)
+        for sent in sents:
+            if len(sent) < 5:
+                continue
+            words = [START] + sent + [CLOSE]
+            result.append(words)
     return result
 
 
-def _to_word(a_sent: str) -> list:
-    """ Filter word as stop words """
-    rst = []
-    for word in re.split(r'(\s|\.|\,|\?|\!|\"|\')+', a_sent):
-        word = word.strip()
-        if not word or word in ',."\'':
-            continue
-        rst.append(word)
-    return rst
+# def _to_word(sent: str) -> list:
+#     """ Filter word as stop words """
+#     rst = []
+#     for word in re.split(r'(\s|\.|\,|\?|\!|\"|\')+', sent):
+#         word = word.strip()
+#         if not word or word in ',."\'':
+#             continue
+#         rst.append(word)
+#     return rst
 
 
-def collate_fn(batch):
-    ko, en = zip(*batch)
-    pad_ko = torch.nn.utils.rnn.pad_sequence(ko,batch_first=True)
-    pad_en = torch.nn.utils.rnn.pad_sequence(en,batch_first=True)
-    return pad_ko, pad_en
+class Tokenizer:
+    def __init__(self, lang='ko'):
+        if lang == 'ko':
+            kkm = Kkma()
+            self.sent_seperator = kkm.sentences
+            self.tokenizer = kkm.morphs
+        elif lang == 'en':
+            tokenizer = MWETokenizer()
+            stemmer = PorterStemmer()
+            self.sent_seperator = sent_tokenize
+            self.tokenizer = lambda x: [stemmer.stem(w) for w in tokenizer.tokenize(x)]
+        else:
+            raise
+
+

@@ -20,5 +20,5 @@ lm.train()
 lm.save('trained.pth')
 mconf.save(mconf_path)
 
-test = ['또 하나 필요한 것은 훌륭한 영어 실력이다.', '또 하나 필요한 것은 훌륭한 영어 실력이다.']
+test = ['또 하나 필요한 것은 훌륭한 영어 실력이다.', '또 하나 필요한 것은 훌륭한 영어 실력이다.', '경찰은 월요일 밤 집무실을 찾아 증거를 압수했다.']
 print(lm.translate(test))

@@ -73,6 +73,8 @@ class Translator:
 
 @torch.no_grad()
 def accuracy(pred, target):
+    print(pred.argmax(1))
+    print(target)
     acc = sum(pred.argmax(1) == target).item() / len(target)
     return acc
 
@@ -80,8 +82,8 @@ def accuracy(pred, target):
 class Seq2SeqModel(Translator):
 
     def train(self):
-        ko_corpus = preprocessor(load_data(self.dconf.train_ko_path))
-        en_corpus = preprocessor(load_data(self.dconf.train_en_path))
+        ko_corpus = preprocessor(load_data(self.dconf.train_ko_path), lang='ko')
+        en_corpus = preprocessor(load_data(self.dconf.train_en_path), lang='en')
         self.ko_vocab.load(ko_corpus)
         self.en_vocab.load(en_corpus)
 
@@ -93,9 +95,7 @@ class Seq2SeqModel(Translator):
                                     num_workers=0, collate_fn=collate_fn)
         print(len(self.ko_vocab), len(self.en_vocab))
         self.mconf.ko_size, self.mconf.en_size = len(self.ko_vocab) + 1, len(self.en_vocab) + 1
-        # self.mconf[]
-        # self.lm = LSTMSeq2Seq(len(self.ko_vocab) + 1, len(self.en_vocab) + 1,
-        #                       self.mconf.emb_dim, self.mconf.hid_dim)
+
         self.model = BiLSTMSeq2Seq(len(self.ko_vocab) + 1, len(self.en_vocab) + 1,
                                    self.mconf.emb_dim, self.mconf.hid_dim)
         self.loss = nn.CrossEntropyLoss()
@@ -137,10 +137,10 @@ class Seq2SeqModel(Translator):
         Translator.load(self, fname)
 
     def predict(self, corpus):
-        ko_corpus = preprocessor(corpus)
+        ko_corpus = preprocessor(corpus, lang='ko')
         pred_set = self.predset_form(ko_corpus, self.ko_vocab)
-        dataset = torch.tensor(pred_set)
-        dataset = torch.nn.utils.rnn.pad_sequence(dataset, batch_first=True)
+        pred_set = [torch.tensor(data) for data in pred_set]
+        dataset = torch.nn.utils.rnn.pad_sequence(pred_set, batch_first=True)
         pred = self.model.predict(dataset, maxlen=dataset.size(1))
         return pred
 
