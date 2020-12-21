@@ -141,7 +141,10 @@ class BiLSTMSeq2Seq(nn.Module):
         """
         enc_output, (hid_state, cell_state) = self.encoder(inp)
         out = []
-        dec_inp = inp  # [batch]
+
+        start = torch.tensor(torch.empty([inp.size(0)]).fill_(3), dtype=torch.long)
+        # dec_inp = self.dec_emb(start)  # [batch, maxlen]
+        dec_inp = start
         for i in range(0, maxlen):
             # Cal attention
             cvec = self.attn(hid_state, enc_output)  # [bsize, hid_size*2]
@@ -149,11 +152,11 @@ class BiLSTMSeq2Seq(nn.Module):
             dec_emb = self.dec_emb(dec_inp)  # [bsize, emb]
             emb = torch.cat((dec_emb, cvec), dim=1)
             hid_state, cell_state = self.dec_lstm(emb, (hid_state, cell_state))
-
-            dec_inp = torch.argmax(F.log_softmax(F.relu(self.out_layer(emb)), dim=1))  # [batch]
+            dec_out = F.log_softmax(F.relu(self.out_layer(hid_state)), dim=1)
+            dec_inp = torch.argmax(dec_out, dim=1)  # [batch]
             out.append(dec_inp)
         out = torch.transpose(torch.stack(out), 0, 1)
-        return out
+        return out.tolist()
 
 
 class LSTMSeq2Seq2(nn.Module):
