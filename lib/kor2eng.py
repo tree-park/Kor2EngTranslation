@@ -80,7 +80,6 @@ def accuracy(pred, target):
 class Seq2SeqModel(Translator):
 
     def train(self):
-
         ko_corpus = preprocessor(load_data(self.dconf.train_ko_path))
         en_corpus = preprocessor(load_data(self.dconf.train_en_path))
         self.ko_vocab.load(ko_corpus)
@@ -93,7 +92,7 @@ class Seq2SeqModel(Translator):
                                     batch_size=self.mconf.batch_size,
                                     num_workers=0, collate_fn=collate_fn)
         print(len(self.ko_vocab), len(self.en_vocab))
-        self.mconf.ko_size, self.mconf.en_size = len(self.ko_vocab)+1, len(self.en_vocab)+1
+        self.mconf.ko_size, self.mconf.en_size = len(self.ko_vocab) + 1, len(self.en_vocab) + 1
         # self.mconf[]
         # self.lm = LSTMSeq2Seq(len(self.ko_vocab) + 1, len(self.en_vocab) + 1,
         #                       self.mconf.emb_dim, self.mconf.hid_dim)

@@ -1,7 +1,6 @@
 import re
 import torch
 from torch.utils.data import Dataset
-from .data_handle import load_data
 
 
 class Corpus(Dataset):
