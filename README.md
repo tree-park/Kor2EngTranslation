@@ -1,4 +1,4 @@
-# Kor2EngTranslation
+# Kor to Eng Translation
 a translation seq2seq task implementation with lstm and attention mechanism by low level pytorch code
 
 
