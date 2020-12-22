@@ -5,6 +5,7 @@ import torch.nn.functional as F
 
 class ConcatAttention(nn.Module):
     """ Concat Attention """
+
     def __init__(self, hid_size):
         super(ConcatAttention, self).__init__()
         self.align = nn.Linear(hid_size * 4, hid_size)
@@ -20,17 +21,18 @@ class ConcatAttention(nn.Module):
         Returns:
             context_vec: [bsize, hid_size*2]
         """
-        # 1. vatten 유사도 = enc_hid * dec_hid : [bsize, maxlen, hid_size*2] *[batch_size, hid_size*2]
-        dec_hid = dec_hid.unsqueeze(1).expand(-1, enc_hids.size(1), -1)  # [batch_size, maxlen, hid_size*2]
-        energy = F.tanh(self.align(torch.cat((dec_hid, enc_hids), dim=2)))  # [batch_size, maxlen, hid_size]
-        energy = self.v(energy).squeeze()  # [bsize, maxlen]
-        attn = F.softmax(energy).unsqueeze(1)  # [bsize, 1, maxlen]
-        context_vec = torch.bmm(attn, enc_hids).squeeze()  # [bsize, 1, maxlen] * [bsize, maxlen, hid_size*2]
-        return context_vec  # [bsize, hid_size*2]
+
+        dec_hid = dec_hid.unsqueeze(1).expand(-1, enc_hids.size(1), -1)
+        energy = F.tanh(self.align(torch.cat((dec_hid, enc_hids), dim=2)))
+        energy = self.v(energy).squeeze()
+        attn = F.softmax(energy).unsqueeze(1)
+        context_vec = torch.bmm(attn, enc_hids).squeeze()
+        return context_vec
 
 
 class DotAttention(nn.Module):
     """ Dot Product Attention """
+
     def __init__(self, hid_size, scaled=True):
         super(DotAttention, self).__init__()
         self.scaled = scaled
@@ -45,11 +47,11 @@ class DotAttention(nn.Module):
         Returns:
             context_vec: [bsize, hid_size*2]
         """
-        # [bsize, maxlen, hid_size*2] * [batch_size, hid_size*2]
-        attn = torch.bmm(enc_hids, dec_hid)  # [bsize, maxlen]
+
+        attn = torch.bmm(enc_hids, dec_hid)
         if self.scaled:
-            attn = attn * (1/torch.sqrt(dec_hid.size(-1)))
+            attn = attn * (1 / torch.sqrt(dec_hid.size(-1)))
         attn = F.softmax(attn, dim=1)
-        # [bsize, maxlen] * [bsize, maxlen, hid_size*2]
-        context_vec = torch.matmul(attn, enc_hids)  # [bsize, hid_size*2]
+
+        context_vec = torch.matmul(attn, enc_hids)
         return context_vec

@@ -12,7 +12,7 @@ START = '[SRT]'
 
 
 class Vocab:
-    # 0 for padding
+    
     WORD2IDX = {PAD: 0, UNKNOWN: 1, CLOSE: 2, START: 3}
 
     def __init__(self, min_cnt):
@@ -33,7 +33,7 @@ class Vocab:
             if self._vocabs_filter(w, vocabs[w]):
                 self.word2idx[w] = idx
                 idx += 1
-        # print(idx, len(self.word2idx))
+        
         return self.word2idx
 
     def _vocabs_filter(self, v, cnt):
@@ -65,8 +65,8 @@ def preprocessor(corpus: list, lang='ko'):
     for line in corpus:
         line = line.strip()
         sents = tkner.sent_seperator(line)
-        sents = [tkner.tokenizer(sent) for sent in sents]  # by words
-        sents = [_to_word(sent) for sent in sents]  # clean word
+        sents = [tkner.tokenizer(sent) for sent in sents]  
+        sents = [_to_word(sent) for sent in sents]  
         for sent in sents:
             if len(sent) < 5:
                 continue
@@ -93,7 +93,7 @@ class Tokenizer:
             self.sent_seperator = kkm.sentences
             self.tokenizer = kkm.morphs
         elif lang == 'en':
-            # tokenizer = word_tokenize
+            
             stemmer = PorterStemmer()
             self.sent_seperator = sent_tokenize
             self.tokenizer = lambda x: [stemmer.stem(w) for w in word_tokenize(x)]

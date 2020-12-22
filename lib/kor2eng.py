@@ -8,7 +8,7 @@ import math
 from lib.util import load_data
 from lib.data_batchify import Corpus, collate_fn
 from lib.data_preprocess import Vocab, preprocessor
-from lib.model.seq2seq import LSTMSeq2Seq, LSTMSeq2Seq2, BiLSTMSeq2Seq
+from lib.model.seq2seq import StackedLSTMSeq2Seq, LSTMSeq2Seq2, BiLSTMSeq2Seq
 
 
 class Translator:
@@ -16,14 +16,12 @@ class Translator:
         self.dconf = dconf
         self.mconf = mconf
 
-        # data pre-process & build data-loader
         self.ko_vocab = Vocab(self.dconf.min_cnt)
         self.en_vocab = Vocab(self.dconf.min_cnt)
         self.voc_size = 0
         self.dataset = None
         self._dataload = None
 
-        # torch flow
         self.model = None
         self.loss = None
         self.perpelexity = None
@@ -38,7 +36,7 @@ class Translator:
 
     def save(self, fname: str):
         """ save model """
-        # torch.save(self.model.state_dict(), 'results/model/' + fname)
+
         torch.save({
             'model': self.model.state_dict(),
             'optim': self.optim.state_dict(),
@@ -64,7 +62,7 @@ class Translator:
         """ Translate Korean to English """
         pred = self.predict(kor)
         print(pred)
-        # convert predict to en wid
+
         rst = []
         for sent_idx in pred:
             sent = [self.en_vocab.get_word(idx) for idx in sent_idx if not 0]
@@ -122,9 +120,6 @@ class Seq2SeqModel(Translator):
                 total_acc += accuracy(pred, en_ts)
                 total_loss += b_loss.item()
 
-            # if epoch % 10 == 0:
-            #     ppl = math.exp(total_loss/10)
-            #     total_acc = 0
             itersize = math.ceil(len(self.dataset) / self.mconf.batch_size)
             ppl = math.exp(total_loss / itersize)
             print(epoch, total_loss, total_acc / itersize, ppl)
@@ -150,7 +145,7 @@ class Seq2SeqModel(Translator):
         for ko, en in zip(ko_corpus, en_corpus):
             ko = [ko_vocab[x] for x in ko]
             en = [en_vocab[x] for x in en]
-            # padding
+
             rst.append([ko, en])
         return rst
 
@@ -158,17 +153,16 @@ class Seq2SeqModel(Translator):
         rst = []
         for ko in corpus:
             ko = [vocab[x] for x in ko]
-            # padding
+
             rst.append(ko)
         return rst
 
     def info(self):
-        # Print model's state_dict
+
         print("Model's state_dict:")
         for param_tensor in self.model.state_dict():
             print(param_tensor, "\t", self.model.state_dict()[param_tensor].size())
 
-        # Print optimizer's state_dict
         print("Optimizer's state_dict:")
         for var_name in self.optim.state_dict():
             print(var_name, "\t", self.optim.state_dict()[var_name])

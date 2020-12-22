@@ -1,9 +1,5 @@
 venv
 __pycache__
-.idea/
-.idea/**
 data
 .idea
-**.iml
-.idea/Kor2EngTranslation.iml
-*.xml
+

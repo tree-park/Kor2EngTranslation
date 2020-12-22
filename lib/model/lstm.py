@@ -24,12 +24,10 @@ class LSTMLayer(nn.Module):
         self.enc_lstm_fw = nn.LSTMCell(inp_size, hid_size)
 
     def forward(self, inp):
-        # [bsize, hid_size]
         hidd = nn.init.xavier_normal_(torch.empty(inp.size(1), self.hid_size))
         cell = nn.init.xavier_normal_(torch.empty(inp.size(1), self.hid_size))
         outputs = []
-        for i in range(inp.size(0)):  # maxlen
-            # emb[i] [bsize, emb_size]
+        for i in range(inp.size(0)):
             hidd, cell = self.enc_lstm_fw(inp[i], (hidd, cell))
             outputs.append(hidd)
         return torch.stack(outputs), (hidd, cell)
@@ -42,12 +40,12 @@ class ReversedLSTMLayer(nn.Module):
         self.enc_lstm_fw = nn.LSTMCell(inp_size, hid_size)
 
     def forward(self, inp):
-        # [bsize, hid_size]
+        
         hidd = nn.init.xavier_normal_(torch.empty(inp.size(1), self.hid_size))
         cell = nn.init.xavier_normal_(torch.empty(inp.size(1), self.hid_size))
         outputs = []
-        for i in range(inp.size(0)-1, -1, -1):  # maxlen reversed
-            # emb[i] [bsize, emb_size]
+        for i in range(inp.size(0)-1, -1, -1):  
+            
             hidd, cell = self.enc_lstm_fw(inp[i], (hidd, cell))
             outputs.append(hidd)
         return torch.stack(reverse(outputs)), (hidd, cell)
