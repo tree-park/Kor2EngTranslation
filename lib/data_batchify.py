@@ -2,12 +2,6 @@ import torch
 from torch.utils.data import Dataset
 
 
-def load_data(path: str):
-    with open(path, 'r') as f:
-        result = f.readlines()
-    return result
-
-
 class Corpus(Dataset):
 
     def __init__(self, data_set):

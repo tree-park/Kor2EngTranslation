@@ -5,8 +5,9 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 import math
 
-from lib.data_handle import load_data
-from lib.data_preprocess import Vocab, Corpus, collate_fn, preprocessor
+from lib.util import load_data
+from lib.data_batchify import Corpus, collate_fn
+from lib.data_preprocess import Vocab, preprocessor
 from lib.model.seq2seq import LSTMSeq2Seq, LSTMSeq2Seq2, BiLSTMSeq2Seq
 
 
@@ -82,8 +83,8 @@ def accuracy(pred, target):
 class Seq2SeqModel(Translator):
 
     def train(self):
-        ko_corpus = preprocessor(load_data(self.dconf.train_ko_path), lang='ko')
         en_corpus = preprocessor(load_data(self.dconf.train_en_path), lang='en')
+        ko_corpus = preprocessor(load_data(self.dconf.train_ko_path), lang='ko')
         self.ko_vocab.load(ko_corpus)
         self.en_vocab.load(en_corpus)
 
