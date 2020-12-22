@@ -9,7 +9,7 @@ Tokennizer
 
 Architecture
 - Word Embedding
-- BiLSTM Encoder
+- BiLSTM Encoder or Stacked LSTM Encoder
 - LSTM Decoder with Attention mechanism
 
 
