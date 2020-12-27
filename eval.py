@@ -27,7 +27,7 @@ if mconf.model == 'seq2seq':
                           mconf.emb_dim, mconf.d_m)
 elif mconf.model == 'transformer':
     model = Transformer(mconf.d_m, len(ko_vocab) + 1, len(en_vocab) + 1,
-                        mconf.d_m * 4, n=3)
+                        mconf.d_m * 4, n_layer=3)
 else:
     raise AttributeError
 

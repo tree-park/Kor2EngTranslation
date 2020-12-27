@@ -20,14 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06615ae2-b40c-4849-84e2-79fc47db4ee1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/transformers" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/lm.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/lm.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data_batchify.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data_batchify.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/kor2eng.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/kor2eng.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers" beforeDir="false" afterPath="$PROJECT_DIR$/transformers" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
