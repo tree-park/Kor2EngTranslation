@@ -20,9 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06615ae2-b40c-4849-84e2-79fc47db4ee1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Kor2EngTranslation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Kor2EngTranslation.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transformers" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/lm.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/lm.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data_batchify.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data_batchify.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/kor2eng.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/kor2eng.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +56,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -127,6 +132,11 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.data_handle" />
+      <item itemvalue="Python.kor2eng" />
+      <item itemvalue="Python.main" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
@@ -222,6 +232,10 @@
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
     <state x="638" y="307" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/43.23.1749.1097@43.23.1749.1097" timestamp="1607352026963" />
+    <state x="891" y="326" width="598" height="490" key="find.popup" timestamp="1609100216369">
+      <screen x="43" y="23" width="1749" height="1097" />
+    </state>
+    <state x="891" y="326" width="598" height="490" key="find.popup/43.23.1749.1097@43.23.1749.1097" timestamp="1609100216369" />
     <state x="801" y="268" width="670" height="676" key="search.everywhere.popup" timestamp="1608447844524">
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
@@ -232,12 +246,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/lib/model/seq2seq.py</url>
-          <line>49</line>
+          <line>42</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/lib/model/seq2seq.py</url>
-          <line>50</line>
+          <line>43</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

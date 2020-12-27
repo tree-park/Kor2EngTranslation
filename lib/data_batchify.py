@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import Dataset
 
 
-class Corpus(Dataset):
+class TrainCorpus(Dataset):
 
     def __init__(self, data_set):
         self._data = data_set
