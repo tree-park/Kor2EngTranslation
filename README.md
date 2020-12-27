@@ -1,5 +1,5 @@
 # Korean to English Translation
-translation task implementation with transformer and seq2seq attention mechanism with low level pytorch code
+Translation task implementation with transformer and seq2seq attention mechanism with low level pytorch code
 
 
 ## Tokennizer  
