@@ -1,6 +1,17 @@
-# Kor2EngTranslation
-a translation task implementation using seq2seq and lstm with attention mechanism
+# Korean to English Translation
+a translation seq2seq task implementation with lstm and attention mechanism by low level pytorch code
 
 
 Tokennizer  
-- pip install konlpy
+- Korean : pip install konlpy
+- English : pip install nltk
+
+
+Architecture
+- Word Embedding
+- BiLSTM Encoder or Stacked LSTM Encoder
+- LSTM Decoder with Attention mechanism
+
+
+Refer
+- Attention mechanism : Neural Machine Translation by Jointly Learning to Align and Translate (https://arxiv.org/abs/1409.0473)
