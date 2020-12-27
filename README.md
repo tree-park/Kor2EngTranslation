@@ -1,17 +1,24 @@
 # Korean to English Translation
-a translation seq2seq task implementation with lstm and attention mechanism by low level pytorch code
+translation task implementation with transformer and seq2seq attention mechanism with low level pytorch code
 
 
-Tokennizer  
+## Tokennizer  
 - Korean : pip install konlpy
 - English : pip install nltk
 
 
-Architecture
+## Architecture  
+BiLSTM Seq2Seq with Attention
 - Word Embedding
 - BiLSTM Encoder or Stacked LSTM Encoder
 - LSTM Decoder with Attention mechanism
 
+Transformer
+- Positional Encoding + WordEmbedding
+- Multi-head Attention, Position-wise Fead Forward Network
+- ResNet + NormLayer
 
-Refer
+
+## Refer
 - Attention mechanism : Neural Machine Translation by Jointly Learning to Align and Translate (https://arxiv.org/abs/1409.0473)
+- Transfomer: Attention is all you need (https://arxiv.org/abs/1706.03762) 
