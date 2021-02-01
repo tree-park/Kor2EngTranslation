@@ -20,9 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06615ae2-b40c-4849-84e2-79fc47db4ee1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Kor2EngTranslation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Kor2EngTranslation.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transformers" beforeDir="false" afterPath="$PROJECT_DIR$/transformers" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +41,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1l229Fw76j0pqabeibcorieC70n" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -52,18 +53,18 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/data" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/data" />
       <recent name="$PROJECT_DIR$" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.train">
     <configuration name="data_handle" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kor2EngTranslation" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -113,12 +114,33 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3.8" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kor2EngTranslation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -131,9 +153,11 @@
       <item itemvalue="Python.data_handle" />
       <item itemvalue="Python.kor2eng" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.train" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.train" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.kor2eng" />
         <item itemvalue="Python.data_handle" />
@@ -167,10 +191,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="582" y="233" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607354789708">
+    <state x="582" y="233" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1612175262581">
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
-    <state x="582" y="233" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/43.23.1749.1097@43.23.1749.1097" timestamp="1607354789708" />
+    <state x="582" y="233" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/43.23.1749.1097@43.23.1749.1097" timestamp="1612175262581" />
     <state x="707" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1607346266910">
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
@@ -183,22 +207,22 @@
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
     <state width="1729" height="438" key="DebuggerActiveHint/43.23.1749.1097@43.23.1749.1097" timestamp="1608378668699" />
-    <state width="1260" height="244" key="GridCell.Tab.0.bottom" timestamp="1608378530473">
+    <state width="854" height="307" key="GridCell.Tab.0.bottom" timestamp="1612176434744">
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
-    <state width="1260" height="244" key="GridCell.Tab.0.bottom/43.23.1749.1097@43.23.1749.1097" timestamp="1608378530473" />
-    <state width="1260" height="244" key="GridCell.Tab.0.center" timestamp="1608378530473">
+    <state width="854" height="307" key="GridCell.Tab.0.bottom/43.23.1749.1097@43.23.1749.1097" timestamp="1612176434744" />
+    <state width="854" height="307" key="GridCell.Tab.0.center" timestamp="1612176434743">
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
-    <state width="1260" height="244" key="GridCell.Tab.0.center/43.23.1749.1097@43.23.1749.1097" timestamp="1608378530473" />
-    <state width="1260" height="244" key="GridCell.Tab.0.left" timestamp="1608378530472">
+    <state width="854" height="307" key="GridCell.Tab.0.center/43.23.1749.1097@43.23.1749.1097" timestamp="1612176434743" />
+    <state width="854" height="307" key="GridCell.Tab.0.left" timestamp="1612176434743">
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
-    <state width="1260" height="244" key="GridCell.Tab.0.left/43.23.1749.1097@43.23.1749.1097" timestamp="1608378530472" />
-    <state width="1260" height="244" key="GridCell.Tab.0.right" timestamp="1608378530473">
+    <state width="854" height="307" key="GridCell.Tab.0.left/43.23.1749.1097@43.23.1749.1097" timestamp="1612176434743" />
+    <state width="854" height="307" key="GridCell.Tab.0.right" timestamp="1612176434744">
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
-    <state width="1260" height="244" key="GridCell.Tab.0.right/43.23.1749.1097@43.23.1749.1097" timestamp="1608378530473" />
+    <state width="854" height="307" key="GridCell.Tab.0.right/43.23.1749.1097@43.23.1749.1097" timestamp="1612176434744" />
     <state width="1260" height="244" key="GridCell.Tab.1.bottom" timestamp="1608378530474">
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
@@ -215,10 +239,10 @@
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
     <state width="1260" height="244" key="GridCell.Tab.1.right/43.23.1749.1097@43.23.1749.1097" timestamp="1608378530474" />
-    <state x="619" y="210" key="SettingsEditor" timestamp="1608438292321">
+    <state x="619" y="210" key="SettingsEditor" timestamp="1612175733070">
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
-    <state x="619" y="210" key="SettingsEditor/43.23.1749.1097@43.23.1749.1097" timestamp="1608438292321" />
+    <state x="619" y="210" key="SettingsEditor/43.23.1749.1097@43.23.1749.1097" timestamp="1612175733070" />
     <state width="736" height="548" key="XDebugger.FullValuePopup" timestamp="1607247418296">
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
@@ -227,10 +251,10 @@
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
     <state x="638" y="307" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/43.23.1749.1097@43.23.1749.1097" timestamp="1607352026963" />
-    <state x="891" y="326" width="598" height="490" key="find.popup" timestamp="1609100216369">
+    <state x="891" y="326" width="598" height="490" key="find.popup" timestamp="1609625389197">
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
-    <state x="891" y="326" width="598" height="490" key="find.popup/43.23.1749.1097@43.23.1749.1097" timestamp="1609100216369" />
+    <state x="891" y="326" width="598" height="490" key="find.popup/43.23.1749.1097@43.23.1749.1097" timestamp="1609625389197" />
     <state x="801" y="268" width="670" height="676" key="search.everywhere.popup" timestamp="1608447844524">
       <screen x="43" y="23" width="1749" height="1097" />
     </state>
