@@ -22,3 +22,7 @@ Transformer
 ## Refer
 - Attention mechanism : Neural Machine Translation by Jointly Learning to Align and Translate (https://arxiv.org/abs/1409.0473)
 - Transfomer: Attention is all you need (https://arxiv.org/abs/1706.03762) 
+
+
+## Start
+pip3 install -r requirements.txt

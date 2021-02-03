@@ -2,6 +2,7 @@
 import os
 import sys
 import torch
+import pickle
 
 from lib.util import Config
 from lib.kor2eng import LangTranslator
@@ -19,33 +20,42 @@ mconf_path = 'config/lm.json'
 dconf = Config(dconf_path)
 mconf = Config(mconf_path)
 
-dev = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-
 print('Using device:', device)
 
-# load & preprocess corpus
-ko_corpus = preprocessor(load_data(dconf.train_ko_path), lang='ko')
-en_corpus = preprocessor(load_data(dconf.train_en_path), lang='en')
+try:
+    with open('preprocessed_data.pickle', 'rb') as f:
+        saved_obj = pickle.load(f)
+        ko_corpus, ko_vocab, en_corpus, en_vocab = saved_obj
+except:
 
-# load vocab
-ko_vocab = Vocab(dconf.min_cnt)
-en_vocab = Vocab(dconf.min_cnt)
-ko_vocab.load(ko_corpus)
-en_vocab.load(en_corpus)
+    # load & preprocess corpus
+    ko_corpus = preprocessor(load_data(dconf.train_ko_path), lang='ko')
+    en_corpus = preprocessor(load_data(dconf.train_en_path), lang='en')
+
+    # load vocab
+    ko_vocab = Vocab(dconf.min_cnt)
+    en_vocab = Vocab(dconf.min_cnt)
+    ko_vocab.load(ko_corpus)
+    en_vocab.load(en_corpus)
+
+# save data as pickle
+with open('preprocessed_data.pickle', 'wb') as f:
+    pickle.dump([ko_corpus, ko_vocab, en_corpus, en_vocab], f, protocol=pickle.HIGHEST_PROTOCOL)
+
+assert all([ko_corpus, ko_vocab, en_corpus, en_vocab])
 
 # define lm model
-
 if mconf.model == 'transformer':
     model = Transformer(mconf.d_m, len(ko_vocab) + 1, len(en_vocab) + 1,
-                        mconf.d_m * 4, n_layer=3, device=device)
+                        mconf.d_m * 8, n=6)
 else:
     model = BiLSTMSeq2Seq(len(ko_vocab) + 1, len(en_vocab) + 1,
-                          mconf.emb_dim, mconf.d_m, device=device)
+                          mconf.emb_dim, mconf.d_m)
 model.to(device)
 
 # load translator and train
-lm = LangTranslator(model, ko_vocab, en_vocab, dconf, mconf)
+lm = LangTranslator(model, ko_vocab, en_vocab, dconf, mconf, device)
 lm.train(ko_corpus, ko_corpus)
 
 # save model

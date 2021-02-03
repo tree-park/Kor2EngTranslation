@@ -4,7 +4,7 @@ import torch.nn.functional as F
 
 from lib.model.lstm import BiLSTM
 from lib.model.attention import ConcatAttention
-
+from .device_info import device
 
 class StackedLSTMSeq2Seq(nn.Module):
 
@@ -99,7 +99,7 @@ class BiLSTMSeq2Seq(nn.Module):
         enc_output, (hid_state, cell_state) = self.encoder(inp)
         out = []
 
-        start = torch.tensor(torch.empty([inp.size(0)]).fill_(3), dtype=torch.long)
+        start = torch.tensor(torch.empty([inp.size(0)]).fill_(3), dtype=torch.long).to(device)
 
         dec_inp = start
         for i in range(0, maxlen):

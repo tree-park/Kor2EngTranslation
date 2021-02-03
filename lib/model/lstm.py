@@ -1,12 +1,13 @@
 import torch
 import torch.nn as nn
 
+from .device_info import device
 
 class BiLSTM(nn.Module):
     def __init__(self, inp_size, hid_size):
         super(BiLSTM, self).__init__()
-        self.fw_lstm = LSTMLayer(inp_size, hid_size)
-        self.bw_lstm = ReversedLSTMLayer(inp_size, hid_size)
+        self.fw_lstm = LSTMLayer(inp_size, hid_size).to(device)
+        self.bw_lstm = ReversedLSTMLayer(inp_size, hid_size).to(device)
 
     def forward(self, inp):
         fw_out, fw_hid = self.fw_lstm(inp)
@@ -21,12 +22,13 @@ class LSTMLayer(nn.Module):
     def __init__(self, inp_size, hid_size):
         super().__init__()
         self.hid_size = hid_size
-        self.enc_lstm_fw = nn.LSTMCell(inp_size, hid_size)
+        self.enc_lstm_fw = nn.LSTMCell(inp_size, hid_size).to(device)
 
     def forward(self, inp):
-        hidd = nn.init.xavier_normal_(torch.empty(inp.size(1), self.hid_size))
-        cell = nn.init.xavier_normal_(torch.empty(inp.size(1), self.hid_size))
+        hidd = nn.init.xavier_normal_(torch.empty(inp.size(1), self.hid_size).to(device)).to(device)
+        cell = nn.init.xavier_normal_(torch.empty(inp.size(1), self.hid_size).to(device)).to(device)
         outputs = []
+        inp = inp.to(device)
         for i in range(inp.size(0)):
             hidd, cell = self.enc_lstm_fw(inp[i], (hidd, cell))
             outputs.append(hidd)
@@ -41,8 +43,8 @@ class ReversedLSTMLayer(nn.Module):
 
     def forward(self, inp):
         
-        hidd = nn.init.xavier_normal_(torch.empty(inp.size(1), self.hid_size))
-        cell = nn.init.xavier_normal_(torch.empty(inp.size(1), self.hid_size))
+        hidd = nn.init.xavier_normal_(torch.empty(inp.size(1), self.hid_size)).to(device)
+        cell = nn.init.xavier_normal_(torch.empty(inp.size(1), self.hid_size)).to(device)
         outputs = []
         for i in range(inp.size(0)-1, -1, -1):  
             

@@ -16,7 +16,7 @@ def accuracy(pred, target):
 
 
 class LangTranslator:
-    def __init__(self, model, ko_vocab, en_vocab, dconf, mconf):
+    def __init__(self, model, ko_vocab, en_vocab, dconf, mconf, device):
         self.dconf = dconf
         self.mconf = mconf
 
@@ -25,6 +25,7 @@ class LangTranslator:
         self.dataset = None
         self.dataload = None
 
+        self.device = device
         self.model = model
         self.loss = nn.CrossEntropyLoss()
         self.optim = optim.Adam(params=self.model.parameters(), lr=self.mconf.lr)
@@ -41,10 +42,9 @@ class LangTranslator:
         total_loss = 0
         total_acc = 0
         self.model.train()
-        self.info()
         for epoch in tqdm(range(self.mconf.epoch), desc='epoch'):
             for i, batch in tqdm(enumerate(self.dataload), desc="step", total=len(self.dataload)):
-                ko, en = batch
+                ko, en = map(lambda ds: ds.to(self.device), batch)
                 self.optim.zero_grad()
                 en_xs = en[:, :-1]
                 en_ts = en[:, 1:]
@@ -56,6 +56,9 @@ class LangTranslator:
 
                 total_acc += accuracy(pred, en_ts)
                 total_loss += b_loss.item()
+
+                del ko, en, en_xs, en_ts, pred
+                torch.cuda.empty_cache()
 
             itersize = math.ceil(len(self.dataset) / self.mconf.batch_size)
             ppl = math.exp(total_loss / itersize)
@@ -86,7 +89,7 @@ class LangTranslator:
         ko_corpus = preprocessor(corpus, lang='ko')
         pred_set = self.predset_form(ko_corpus, self.ko_vocab)
         pred_set = [torch.tensor(data) for data in pred_set]
-        dataset = torch.nn.utils.rnn.pad_sequence(pred_set, batch_first=True)
+        dataset = torch.nn.utils.rnn.pad_sequence(pred_set, batch_first=True).to(self.device)
         pred = self.model.predict(dataset, maxlen=dataset.size(1))
         return pred
 
