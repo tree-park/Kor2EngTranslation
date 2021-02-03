@@ -39,9 +39,9 @@ except:
     ko_vocab.load(ko_corpus)
     en_vocab.load(en_corpus)
 
-# save data as pickle
-with open('preprocessed_data.pickle', 'wb') as f:
-    pickle.dump([ko_corpus, ko_vocab, en_corpus, en_vocab], f, protocol=pickle.HIGHEST_PROTOCOL)
+    # save data as pickle
+    with open('preprocessed_data.pickle', 'wb') as f:
+        pickle.dump([ko_corpus, ko_vocab, en_corpus, en_vocab], f, protocol=pickle.HIGHEST_PROTOCOL)
 
 assert all([ko_corpus, ko_vocab, en_corpus, en_vocab])
 
@@ -56,7 +56,7 @@ model.to(device)
 
 # load translator and train
 lm = LangTranslator(model, ko_vocab, en_vocab, dconf, mconf, device)
-lm.train(ko_corpus, ko_corpus)
+lm.train(ko_corpus, en_corpus)
 
 # save model
 lm.save('trained.pth')

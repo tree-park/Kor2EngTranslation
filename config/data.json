@@ -1,5 +1,5 @@
 {
-  "max_len": 100,
+  "max_len": 64,
   "min_cnt": 5,
   "train_en_path": "data/korean-english-park.train/korean-english-park.train.en",
   "train_ko_path": "data/korean-english-park.train/korean-english-park.train.ko",
