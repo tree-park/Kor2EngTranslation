@@ -1,1 +1,1 @@
-{"model": "transformer", "emb_dim": 128, "d_m": 64, "epoch": 30, "batch_size": 135, "lr": 0.0001, "ko_size": 3131, "en_size": 2521}
+{"model": "transformer", "d_m": 512, "step": 100000, "batch_size": 50, "lr": 0.0001}

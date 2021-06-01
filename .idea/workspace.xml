@@ -20,10 +20,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06615ae2-b40c-4849-84e2-79fc47db4ee1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/train_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/Kor2EngTranslation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Kor2EngTranslation.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/lm.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/lm.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid3632.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid8080.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/kor2eng.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/kor2eng.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessed_data.pickle" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_gpu.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformer" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +45,17 @@
       <list>
         <option value="Python Script" />
       </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
     </option>
   </component>
   <component name="Git.Settings">
@@ -52,20 +73,25 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="credentialsType com.jetbrains.python.remote.PyCreateRemoteInterpreterDialog$PyCreateRemoteSdkForm" value="Web Deployment" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data/korean-english-park.train" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/korean-english-park.train" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/data" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/transformer/results/model" />
       <recent name="$PROJECT_DIR$/data" />
       <recent name="$PROJECT_DIR$" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/data" />
-    </key>
   </component>
   <component name="RunManager" selected="Python.train">
-    <configuration name="data_handle" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="eval" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kor2EngTranslation" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -73,32 +99,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lib" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lib/data_handle.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="kor2eng" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Kor2EngTranslation" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lib" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lib/kor2eng.py" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/eval.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -119,6 +125,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -135,11 +142,12 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="sftp://sori@49.50.172.228:16022/home/sori/venv/pytorch_cuda/bin/python3" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -149,18 +157,64 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="train_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kor2EngTranslation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="transformer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kor2EngTranslation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/translator/lib/model" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/translator/lib/model/transformer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.data_handle" />
-      <item itemvalue="Python.kor2eng" />
+      <item itemvalue="Python.eval" />
       <item itemvalue="Python.main" />
       <item itemvalue="Python.train" />
+      <item itemvalue="Python.train_test" />
+      <item itemvalue="Python.transformer" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.train" />
+        <item itemvalue="Python.transformer" />
+        <item itemvalue="Python.eval" />
+        <item itemvalue="Python.train_test" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.kor2eng" />
-        <item itemvalue="Python.data_handle" />
       </list>
     </recent_temporary>
   </component>
@@ -175,8 +229,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606780711060</updated>
+      <workItem from="1622478784195" duration="7761000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -189,76 +247,6 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="582" y="233" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1612175262581">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state x="582" y="233" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/43.23.1749.1097@43.23.1749.1097" timestamp="1612175262581" />
-    <state x="707" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1607346266910">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state x="707" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/43.23.1749.1097@43.23.1749.1097" timestamp="1607346266910" />
-    <state x="868" y="326" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607188853577">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state x="868" y="326" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/43.23.1749.1097@43.23.1749.1097" timestamp="1607188853577" />
-    <state width="1729" height="438" key="DebuggerActiveHint" timestamp="1608378668699">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state width="1729" height="438" key="DebuggerActiveHint/43.23.1749.1097@43.23.1749.1097" timestamp="1608378668699" />
-    <state width="854" height="307" key="GridCell.Tab.0.bottom" timestamp="1612176434744">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state width="854" height="307" key="GridCell.Tab.0.bottom/43.23.1749.1097@43.23.1749.1097" timestamp="1612176434744" />
-    <state width="854" height="307" key="GridCell.Tab.0.center" timestamp="1612176434743">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state width="854" height="307" key="GridCell.Tab.0.center/43.23.1749.1097@43.23.1749.1097" timestamp="1612176434743" />
-    <state width="854" height="307" key="GridCell.Tab.0.left" timestamp="1612176434743">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state width="854" height="307" key="GridCell.Tab.0.left/43.23.1749.1097@43.23.1749.1097" timestamp="1612176434743" />
-    <state width="854" height="307" key="GridCell.Tab.0.right" timestamp="1612176434744">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state width="854" height="307" key="GridCell.Tab.0.right/43.23.1749.1097@43.23.1749.1097" timestamp="1612176434744" />
-    <state width="1260" height="244" key="GridCell.Tab.1.bottom" timestamp="1608378530474">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state width="1260" height="244" key="GridCell.Tab.1.bottom/43.23.1749.1097@43.23.1749.1097" timestamp="1608378530474" />
-    <state width="1260" height="244" key="GridCell.Tab.1.center" timestamp="1608378530474">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state width="1260" height="244" key="GridCell.Tab.1.center/43.23.1749.1097@43.23.1749.1097" timestamp="1608378530474" />
-    <state width="1260" height="244" key="GridCell.Tab.1.left" timestamp="1608378530474">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state width="1260" height="244" key="GridCell.Tab.1.left/43.23.1749.1097@43.23.1749.1097" timestamp="1608378530474" />
-    <state width="1260" height="244" key="GridCell.Tab.1.right" timestamp="1608378530474">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state width="1260" height="244" key="GridCell.Tab.1.right/43.23.1749.1097@43.23.1749.1097" timestamp="1608378530474" />
-    <state x="619" y="210" key="SettingsEditor" timestamp="1612175733070">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state x="619" y="210" key="SettingsEditor/43.23.1749.1097@43.23.1749.1097" timestamp="1612175733070" />
-    <state width="736" height="548" key="XDebugger.FullValuePopup" timestamp="1607247418296">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state width="736" height="548" key="XDebugger.FullValuePopup/43.23.1749.1097@43.23.1749.1097" timestamp="1607247418296" />
-    <state x="638" y="307" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1607352026963">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state x="638" y="307" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/43.23.1749.1097@43.23.1749.1097" timestamp="1607352026963" />
-    <state x="891" y="326" width="598" height="490" key="find.popup" timestamp="1609625389197">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state x="891" y="326" width="598" height="490" key="find.popup/43.23.1749.1097@43.23.1749.1097" timestamp="1609625389197" />
-    <state x="801" y="268" width="670" height="676" key="search.everywhere.popup" timestamp="1608447844524">
-      <screen x="43" y="23" width="1749" height="1097" />
-    </state>
-    <state x="801" y="268" width="670" height="676" key="search.everywhere.popup/43.23.1749.1097@43.23.1749.1097" timestamp="1608447844524" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -273,7 +261,61 @@
           <line>43</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/train_test.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/train_test.py</url>
+          <line>72</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/train.py</url>
+          <line>72</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/eval.py</url>
+          <line>53</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lib/kor2eng.py</url>
+          <line>51</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lib/kor2eng.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lib/kor2eng.py</url>
+          <line>53</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lib/kor2eng.py</url>
+          <line>54</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lib/kor2eng.py</url>
+          <line>55</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/train.py</url>
+          <line>65</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/kor_to_eng_translation$train.coverage" NAME="train Coverage Results" MODIFIED="1622489404758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kor_to_eng_translation$transformer.coverage" NAME="transformer Coverage Results" MODIFIED="1622488948284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/translator/lib/model" />
   </component>
 </project>

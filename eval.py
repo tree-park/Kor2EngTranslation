@@ -6,7 +6,7 @@ from lib.kor2eng import LangTranslator
 from lib.util import load_data
 from lib.data_preprocess import Vocab, preprocessor
 from lib.model.seq2seq import BiLSTMSeq2Seq
-from transformer.lib.model.transformer import Transformer
+from transformers.lib.model.transformer import Transformer
 
 
 # load configs
@@ -26,7 +26,7 @@ with open('preprocessed_data.pickle', 'rb') as f:
 if mconf.model == 'seq2seq':
     model = BiLSTMSeq2Seq(len(ko_vocab) + 1, len(en_vocab) + 1,
                           mconf.emb_dim, mconf.d_m)
-elif mconf.model == 'transformer':
+elif mconf.model == 'transformers':
     model = Transformer(mconf.d_m, len(ko_vocab) + 1, len(en_vocab) + 1,
                         mconf.d_m * 8, n=6)
 else:
@@ -34,7 +34,7 @@ else:
 
 model.to(device)
 
-# load translator and train
+# load transformers and train
 lm = LangTranslator(model, ko_vocab, en_vocab, dconf, mconf, device)
 lm.load('trained.pth')
 

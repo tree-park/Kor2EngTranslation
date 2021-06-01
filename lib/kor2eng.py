@@ -42,8 +42,11 @@ class LangTranslator:
         total_loss = 0
         total_acc = 0
         self.model.train()
-        for epoch in tqdm(range(self.mconf.epoch), desc='epoch'):
+        max_step = self.mconf.step
+        step = 0
+        while True:
             for i, batch in tqdm(enumerate(self.dataload), desc="step", total=len(self.dataload)):
+                step += 1
                 ko, en = map(lambda ds: ds.to(self.device), batch)
                 self.optim.zero_grad()
                 en_xs = en[:, :-1]
@@ -62,10 +65,13 @@ class LangTranslator:
 
             itersize = math.ceil(len(self.dataset) / self.mconf.batch_size)
             ppl = math.exp(total_loss / itersize)
-            print(epoch, total_loss, total_acc / itersize, ppl)
+            print(step, total_loss, total_acc / itersize, ppl)
             self.lrscheder.step(total_loss)
             total_loss = 0
-        self.en_vocab.to_idx2word()
+            self.en_vocab.to_idx2word()
+
+            if step == max_step:
+                break
 
     def trainset_form(self, ko_corpus, en_corpus, ko_vocab, en_vocab):
         """ form train data - word to idx """
@@ -126,11 +132,11 @@ class LangTranslator:
         self.model.eval()
         print(len(self.ko_vocab), len(self.en_vocab))
 
-    def __repr__(self):
-        print("Model's state_dict:")
-        for param_tensor in self.model.state_dict():
-            print(param_tensor, "\t", self.model.state_dict()[param_tensor].size())
-
-        print("Optimizer's state_dict:")
-        for var_name in self.optim.state_dict():
-            print(var_name, "\t", self.optim.state_dict()[var_name])
+    # def __repr__(self):
+    #     print("Model's state_dict:")
+    #     for param_tensor in self.model.state_dict():
+    #         print(param_tensor, "\t", self.model.state_dict()[param_tensor].size())
+    #
+    #     print("Optimizer's state_dict:")
+    #     for var_name in self.optim.state_dict():
+    #         print(var_name, "\t", self.optim.state_dict()[var_name])
