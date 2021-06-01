@@ -27,7 +27,7 @@ class LangTranslator:
 
         self.device = device
         self.model = model
-        self.loss = nn.CrossEntropyLoss()
+        self.loss = nn.CrossEntropyLoss(ignore_index=0).to(self.device)
         self.optim = optim.Adam(params=self.model.parameters(), lr=self.mconf.lr)
         self.lrscheder = optim.lr_scheduler.ReduceLROnPlateau(self.optim, patience=5)
 
@@ -49,18 +49,17 @@ class LangTranslator:
                 step += 1
                 ko, en = map(lambda ds: ds.to(self.device), batch)
                 self.optim.zero_grad()
-                en_xs = en[:, :-1]
-                en_ts = en[:, 1:]
-                pred = self.model(ko, en_xs)
-                pred, en_ts = pred.view(-1, pred.shape[2]), en_ts.reshape(1, -1).squeeze(0)
-                b_loss = self.loss(pred, en_ts)
+                pred = self.model(ko, en[:, :-1])
+                pred, target = pred.contiguous().view(-1, pred.shape[2]), en[:, 1:].contiguous().reshape(1, -1).squeeze(0)
+                b_loss = self.loss(pred, target)
                 b_loss.backward()
+                torch.nn.utils.clip_grad_norm_(self.model.parameters(), 1)
                 self.optim.step()
 
-                total_acc += accuracy(pred, en_ts)
+                total_acc += accuracy(pred, target)
                 total_loss += b_loss.item()
 
-                del ko, en, en_xs, en_ts, pred
+                del ko, en, target, pred
                 torch.cuda.empty_cache()
 
             itersize = math.ceil(len(self.dataset) / self.mconf.batch_size)
@@ -132,11 +131,3 @@ class LangTranslator:
         self.model.eval()
         print(len(self.ko_vocab), len(self.en_vocab))
 
-    # def __repr__(self):
-    #     print("Model's state_dict:")
-    #     for param_tensor in self.model.state_dict():
-    #         print(param_tensor, "\t", self.model.state_dict()[param_tensor].size())
-    #
-    #     print("Optimizer's state_dict:")
-    #     for var_name in self.optim.state_dict():
-    #         print(var_name, "\t", self.optim.state_dict()[var_name])

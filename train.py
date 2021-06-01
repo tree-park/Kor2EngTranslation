@@ -45,6 +45,7 @@ except:
                     f,
                     protocol=pickle.HIGHEST_PROTOCOL)
 
+
 assert all([ko_corpus, ko_vocab, en_corpus, en_vocab])
 
 

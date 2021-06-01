@@ -20,20 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06615ae2-b40c-4849-84e2-79fc47db4ee1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/train_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Kor2EngTranslation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Kor2EngTranslation.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/lm.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/lm.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid3632.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid8080.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/kor2eng.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/kor2eng.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessed_data.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/model/trained.pth" beforeDir="false" afterPath="$PROJECT_DIR$/results/model/trained.pth" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_gpu.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/transformer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers" beforeDir="false" afterPath="$PROJECT_DIR$/transformers" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers/lib/data_preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/lib/data_preprocess.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers/lib/model/layers/embedding.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/lib/model/layers/embedding.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers/lib/model/layers/modules.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/lib/model/layers/modules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers/lib/model/layers/sublayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/lib/model/layers/sublayer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers/lib/model/transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/lib/model/transformer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +227,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606780711060</updated>
-      <workItem from="1622478784195" duration="7761000" />
+      <workItem from="1622478784195" duration="8247000" />
     </task>
     <servers />
   </component>
@@ -273,7 +271,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/train.py</url>
-          <line>72</line>
+          <line>73</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -283,32 +281,32 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/lib/kor2eng.py</url>
-          <line>51</line>
+          <line>50</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/lib/kor2eng.py</url>
-          <line>52</line>
+          <line>51</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/lib/kor2eng.py</url>
-          <line>53</line>
+          <line>52</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/lib/kor2eng.py</url>
-          <line>54</line>
+          <line>53</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/lib/kor2eng.py</url>
-          <line>55</line>
+          <line>54</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/train.py</url>
-          <line>65</line>
+          <line>66</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
