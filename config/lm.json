@@ -1,2 +1,0 @@
-{"model": "transformer", "d_m": 512, "step": 100000, "batch_size": 50, "lr": 0.0001}
-
