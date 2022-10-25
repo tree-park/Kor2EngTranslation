@@ -1,4 +1,0 @@
-[submodule "transformers"]
-	path = transformers
-	url = git@github.com:tree-park/transformers.git
-	branch = main
